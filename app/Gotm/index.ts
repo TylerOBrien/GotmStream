@@ -34,7 +34,7 @@ export async function GotmHandleChat(
     }
 
     const command = message.contents.slice(1);
-    const response = await fetch(`https://${ GotmConfig.host }/commands/${ command }`);
+    const response = await fetch(`https://${ GotmConfig.host }/commands/${ command.toLowerCase() }`);
 
     if (response.status === 404) {
         return;
