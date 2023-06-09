@@ -9,4 +9,6 @@ export type ConfigKey = 'debug' |
                         'username' |
                         'oauth' |
                         'twitchid' |
-                        'bttvids';
+                        'bttvids' |
+                        'gotm-schema' |
+                        'gotm-host';
