@@ -1,4 +1,10 @@
 /**
+ * Config
+*/
+
+import { GotmConfig } from '@config/Gotm';
+
+/**
  * System Imports
 */
 
@@ -28,7 +34,7 @@ export async function GotmHandleChat(
     }
 
     const command = message.contents.slice(1);
-    const response = await fetch(`/commands/${ command }`);
+    const response = await fetch(`https://${ GotmConfig.host }/commands/${ command }`);
 
     if (response.status === 404) {
         return;
