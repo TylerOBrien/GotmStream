@@ -2,22 +2,37 @@
  * System Imports
 */
 
-import { ChatCommand } from '@system/Chat';
+import { ChatMessage } from '@system/Chat';
 import { TmiSend } from '@system/Tmi';
+
+/**
+ * Private Functions
+*/
 
 /**
  * Public Functions
 */
 
 /**
- * The handler for the GOTM chat command.
+ * The handler for the GOTM chat message.
  *
- * @param {ChatCommand} command The command instance.
+ * @param {ChatCommand} message The message instance.
  *
- * @return {void}
+ * @return {Promise<void>}
  */
-export function GotmCommandExec(
-    command: ChatCommand): void
+export async function GotmHandleChat(
+    message: ChatMessage): Promise<void>
 {
-    TmiSend('This is the GOTM message.');
+    if (message.contents[0] !== '!') {
+        return;
+    }
+
+    const command = message.contents.slice(1);
+    const response = await fetch(`/commands/${ command }`);
+
+    if (response.status === 404) {
+        return;
+    }
+
+    TmiSend(await response.text());
 }

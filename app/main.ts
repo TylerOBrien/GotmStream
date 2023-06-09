@@ -2,7 +2,7 @@
  * System Imports
 */
 
-import { CommandRegister } from '@system/Command';
+import { ChatAddEventHandler } from '@system/Chat';
 import { Config, ConfigInit } from '@system/Config';
 import { TmiInit } from '@system/Tmi';
 
@@ -10,7 +10,7 @@ import { TmiInit } from '@system/Tmi';
  * Relative Imports
 */
 
-import { GotmCommandExec } from './Gotm';
+import { GotmHandleChat } from './Gotm';
 
 /**
  * Functions
@@ -24,7 +24,7 @@ async function ApplicationStart(): Promise<void>
     await ConfigInit();
     await TmiInit(Config('username'), Config('oauth'), Config('channel'));
 
-    CommandRegister('gotm', GotmCommandExec);
+    ChatAddEventHandler(GotmHandleChat);
 }
 
 /**
