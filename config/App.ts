@@ -9,5 +9,5 @@ import { Config } from '@system/Config';
 */
 
 export const AppConfig = {
-    get debug() { return Config('debug').toLowerCase() === 'true'; },
+    get debug() { return (Config('debug') || '').toLowerCase() === 'true'; },
 };
